@@ -1,0 +1,111 @@
+\chapter{Données et outils utilisés}
+
+\section{Introduction}
+
+Ce chapitre présente l'approche méthodologique adoptée dans le cadre de ce projet.
+Nous y détaillons les différentes sources de données exploitées, les étapes de  Nettoyage et de préparation des données, 
+ainsi que les outils utilisés pour leur traitement, leur analyse et leur visualisation. 
+
+Comprendre la nature des données est essentiel pour interpréter correctement les résultats obtenus. 
+Par ailleurs, le choix des outils d’analyse joue un rôle déterminant dans la rigueur et la reproductibilité des analyses menées.
+
+\section{Sources et Description des données}
+\subsection{Sources de données}
+\hspace{-1cm}
+Ce projet s’appuie sur trois principales sources de données fournies par des institutions officielles : 
+\begin{itemize}
+    \item \textbf{l’Office du Baccalauréat du Sénégal};
+    \item \textbf{la Direction de l’Informatique et des Systèmes d’Information (DISI)} de l’UCAD;
+\end{itemize}
+
+Ces sources couvrent l’ensemble du parcours des étudiants, depuis leur réussite au bac jusqu’à leur évolution dans l’enseignement supérieur.
+
+\subsection{Description des données}
+
+\subsubsection{Résultats du Baccalauréat (2006–2024)}
+
+Ces données ont été fournies par l’Office du Baccalauréat du Sénégal. 
+Elles contiennent les informations relatives aux candidats (année, série, résultat, mention, session, etc.). 
+Elles sont utiles pour suivre l’évolution du taux de réussite au bac et évaluer l’effet des réformes introduites dans certaines séries.
+
+\subsubsection{Inscriptions universitaires à l’UCAD (2002–2024)}
+
+Ces données proviennent de la Direction de l’Informatique et des Systèmes d’Information (DISI) de l’UCAD. 
+Elles incluent les informations sur les étudiants inscrits : année d’inscription, série d’origine, sexe, âge, établissement, etc. 
+Elles permettent d’analyser les flux d’entrée à l’université selon le profil des bacheliers.
+
+\subsubsection{Résultats académiques à l’UCAD (2010–2023)}
+
+Également issues de la DISI de l’UCAD, ces données donnent des détails sur la performance académique des étudiants :
+moyenne annuelle, crédits validés, session, mention et résultat (passage, redoublement). 
+Elles servent à évaluer la réussite universitaire en fonction des parcours scolaires initiaux.
+
+\newpage
+\section{Outils et Technologies utilisés}
+
+\subsection{Python et ses bibliothèques }
+
+\includegraphics[width=3cm]{images/python.png}
+
+Python est un langage de programmation open source, interprété, 
+simple à apprendre et largement utilisé dans le domaine scientifique et technique.
+Python s’est imposé comme l’un des outils les plus puissants pour l’analyse de données et le développement de modèles d’intelligence artificielle, 
+notamment en raison de la richesse de ses bibliothèques spécialisées \cite{python}.
+
+Dans le cadre de cette étude, Python a été utilisé à la fois pour le traitement, l’exploration et la visualisation des données,
+ainsi que pour le développement de modèles de machine learning.
+
+\subsubsection{bibliothèques utilisées}
+
+\includegraphics[width=3cm]{images/Pandas_logo.png}
+
+Pandas est une bibliothèque Python spécialisée dans la manipulation et l’analyse de données. 
+Elle offre des structures de données flexibles et efficaces, notamment les \textbf{DataFrame}, 
+qui permettent de gérer facilement des tableaux de données similaires à ceux d'Excel ou d'une base de données\cite{pandas}.
+
+C’est sans doute le package le plus utilisé en science des données. Grâce à ses nombreuses fonctionnalités,
+il ma permet de charger, filtrer, nettoyer et transformer les jeux de données de manière rapide et intuitive.
+
+\includegraphics[width=4cm]{images/Matplotlib.png}
+
+Matplotlib est une bibliothèque Python dédiée à la visualisation de données. 
+Elle permet de créer une grande variété de graphiques statiques. 
+Son interface simple et sa compatibilité avec les structures de données 
+comme les DataFrame de pandas en font un outil de choix pour représenter visuellement les résultats d’une analyse \cite{matplotlib}.
+
+\includegraphics[width=3cm]{images/sckitlearn.png}
+
+Scikit-learn est une bibliothèque Python dédiée au machine learning. 
+Elle offre des outils simples et efficaces pour appliquer des modèles de classification, de régression et de clustering \cite{scikitLearn}.
+
+Dans mon projet, je l’ai utilisée pour prédire le taux de réussite au baccalauréat. 
+Elle m’a aussi permis d’évaluer les performances des modèles grâce à des métriques comme (RMSE).
+
+\includegraphics[width=5cm]{images/statsmodes.png}
+
+Statsmodels est une bibliothèque Python conçue pour l’estimation de modèles statistiques. 
+Elle est particulièrement utilisée pour les analyses de régression, les séries temporelles et les tests statistiques \cite{statsmodels}.
+
+Dans mon projet, Statsmodels m’a servi à réaliser des régressions linéaires et à effectuer des tests d’hypothèses. 
+Elle m’a permis d’interpréter les relations entre les variables, grâce à des résultats détaillés incluant les coefficients, 
+les p-values et les intervalles de confiance.
+
+\subsection{Power BI}
+
+\includegraphics[width=4cm]{images/powerbi.png}
+
+Power BI est un outil de visualisation et d’analyse de données développé par Microsoft. 
+Il permet de créer des tableaux de bord interactifs et dynamiques à partir de diverses sources de données, 
+facilitant ainsi l'exploration visuelle et la prise de décision basée sur les données \cite{powerBI}.
+
+Dans le cadre de mon projet, j’ai utilisé Power BI pour concevoir un tableau de bord interactif regroupant les statistiques du baccalauréat de 2006 à 2024. 
+Ce tableau de bord, présenté dans le chapitre 6, est destiné à l’Office du Baccalauréat. Il a pour objectif de faciliter l’analyse des données historiques du bac et de servir de support à toute nouvelle étude portant sur l’évolution du système éducatif.
+
+
+\section{Conclusion}
+
+Ce chapitre a permis de présenter les données exploitées ainsi que les outils mobilisés pour leur traitement, leur analyse et leur visualisation. 
+Les trois jeux de données, provenant de sources officielles telles que l’Office du Baccalauréat et la DISI de l’UCAD, 
+offrent une base solide pour évaluer l’impact des réformes éducatives sur les résultats au bac et l’insertion universitaire. 
+Par ailleurs, l’utilisation d’outils puissants comme Python et ses bibliothèques spécialisées, ainsi que Power BI pour la visualisation, 
+garantit une analyse rigoureuse, reproductible et accessible. Ces ressources forment ainsi le socle méthodologique sur lequel reposent les analyses menées dans les chapitres suivants.

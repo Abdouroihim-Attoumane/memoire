@@ -1,0 +1,27 @@
+% L'en-tête
+\fancyhead[L]{\leftmark} % Titre de la section
+\renewcommand{\headrulewidth}{2pt}    % Épaisseur de la ligne
+\setlength{\headsep}{45pt}    % Distance entre l'en-tête et le texte
+% Modifier la couleur des lignes
+\makeatletter
+\renewcommand{\headrule}{\color{blue}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}
+\makeatother
+
+% Le pied de page
+\fancyfoot[L]{ABDOUROIHIM Attoumane} % Nom de l'auteur
+\fancyfoot[C]{UCAD-FST-IMN} % Nom de l'établissement
+\fancyfoot[R]{\thepage}        % Numéro de page
+\renewcommand{\footrulewidth}{2pt}    % Épaisseur de la ligne
+
+% Espacement entre les lignes
+\hyphenpenalty=10000
+\tolerance=10000
+
+% Commande pour tracer une ligne horizontale
+\newcommand{\HRule}{\noindent\textcolor{bleufonce}{\rule{16cm}{0.5mm}}}
+
+% Définition des couleurs
+\definecolor{bleufonce}{RGB}{0, 0, 150} % Bleu foncé 
+
+\renewcommand{\lstlistingname}{Code}       % Change "Listing" en "Code"
+\renewcommand{\lstlistlistingname}{Table des codes}  % Titre de la table des codes
