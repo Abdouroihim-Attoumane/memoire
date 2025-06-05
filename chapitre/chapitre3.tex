@@ -98,12 +98,12 @@ nom & numero\_table & serie & sexe & age & etablissement & moy\_finale \\
 CISSE & 56234 & L'1 & M & 17 & LYCEE CHARLES DEGAULLE & 11,00 \\
 KANE & 56234 & L2 & M & 21 & LYCEE DE ROSS - BETHIO & 07,07 \\
 BOYE & 56513 & L'1 & F & 19 & LYCEE EL HADJ OMAR FOUTIYOU TALL & 05,58 \\
-CAMARA & 56513 & L'1 & M & 23 & STRUCTURE D'ENTRE AIDE DU LYCEE EL HADJ OMAR TALL & 07,17 \\
+CAMARA & 56513 & L'1 & M & 23 & LYCEE EL HADJ OMAR TALL & 07,17 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Le tableau (table~\ref{lst:doublon}) illustre un exemple concret pour l’année 2012, où deux élèves de centres différents ont le même numéro de table mais des informations distinctes. 
+Le tableau (table~\ref{tab:doublon}) illustre un exemple concret pour l’année 2012, où deux élèves de centres différents ont le même numéro de table mais des informations distinctes. 
 Ces cas ont été traités avec prudence dans la suite des analyses.
 
 \textbf{Remarque :}
@@ -222,13 +222,17 @@ all_data['admis'] = all_data['resultat'].apply(lambda x: 'admis'
                             else 'non admis')
 
 # Creation de la colonne 'session' de 'admis'
-all_data['session'] = all_data['resultat'].apply(lambda x: '1er Tour' 
+all_data['session'] = all_data['resultat'].apply(
+                            lambda x: '1er Tour' 
                             if pd.notna(x) and x == '111' 
-                            else ('2e Tour' if pd.notna(x) and x == '101' 
-                                    else ''))
+                            else ('2e Tour' 
+                                if pd.notna(x) 
+                                and x == '101' else ''))
 \end{lstlisting}
 
 Ce pré-traitement permet d’améliorer la lisibilité des résultats, notamment dans les agrégations et visualisations.
+
+\subsection{creation du dataFrame récapitulatif}
 
 \newpage
 \section{Fusion des données des Inscrits et des Résultats de l’UCAD}
@@ -276,7 +280,7 @@ memory usage: 121.9+ MB
 \newpage
 \subsection{Données des résultats de l’UCAD}
 
-La sortie de code \ref{lst:resultat} présente les informations générales de la base de données contenant les résultats universitaires des étudiants de l’UCAD. 
+La sortie de code \ref{lst:resultat_ucad} présente les informations générales de la base de données contenant les résultats universitaires des étudiants de l’UCAD. 
 Cette base couvre la période allant de 2010 à 2024, et concerne uniquement les établissements ayant effectué leurs délibérations sur la plateforme institutionnelle de la DISI. 
 On y retrouve un total de 753 828 enregistrements répartis sur 27 colonnes.
 
@@ -311,10 +315,10 @@ les colonnes \textit{NUMERO} et \textit{ANNEE UNIVERSITAIRE} ont été utilisée
     backgroundcolor=\color{gray!10}
 ]
 df_final = pd.merge(df_inscrit, # Premier DataFrame
-                df_resultat, # Deuxieme DataFrame
-                on=['NUMERO', 'ANNEE UNIVERSITAIRE'], # Cles de jointure
-                how='left' # garde toutes les lignes de df_inscrit
-                ) 
+           df_resultat, # Deuxieme DataFrame
+           on=['NUMERO', 'ANNEE UNIVERSITAIRE'], # Cles de jointure
+           how='left' # garde toutes les lignes de df_inscrit
+            ) 
 \end{lstlisting}
 
 La fusion a été réalisée à l’aide de l’option \texttt{how='left'} pour conserver l’ensemble des inscrits, 
@@ -354,6 +358,67 @@ Cela explique la présence d’un grand nombre de valeurs manquantes dans la col
 notamment pour les étudiants dont les résultats n'ont pas encore été délibérés ou publiés sur la plateforme.
 
 \newpage
-
 \section{Filtage des données}
+
+Afin de concentrer l’analyse sur la population cible et sur les éléments pertinents pour notre étude, 
+une étape de filtrage rigoureuse des données a été nécessaire. 
+Cette étape vise à exclure les individus et les séries qui ne rentrent pas dans le périmètre de l’étude.
+
+\subsection{Nationalité}
+
+La variable \textit{NATIONALITE} a été filtrée pour ne conserver que les étudiants de nationalité sénégalaise.
+Seuls les candidats de nationalité sénégalaise ont été retenus. 
+Cela permet de mieux étudier l’impact des réformes du baccalauréat sur les élèves du système éducatif sénégalais.
+
+\subsection{Séries du baccalauréat}
+La variable \textit{SERIE\_BACC} a été filtrée pour ne conserver que les séries pertinentes pour l’analyse.
+
+Nous avons sélectionné uniquement les séries concernées par les réformes étudiées et pertinentes dans le contexte de l’enseignement général ou technique, telles que :
+\begin{itemize}
+\item L1 (Littéraire 1)
+\item L2 (Littéraire 2)
+\item S1 (Scientifique 1)
+\item S2 (Scientifique 2)
+\item T1 (Technique 1)  
+\item T2 (Technique 2)
+\item T3 (Technique 3)
+\item T4 (Technique 4)
+\end{itemize}
+
+\subsection{Niveau universitaire}
+
+Seuls les étudiants inscrits en L1, L2 ou L3, correspondant au premier cycle universitaire, ont été retenus. 
+Cela permet d’observer directement les effets des réformes du baccalauréat sur les premières années d’insertion universitaire.
+
+\newpage
+\begin{lstlisting}[language=Python,
+    caption=Filtrage des données,
+    label=lst:filtrage,
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{gray!10}
+]
+<class 'pandas.core.frame.DataFrame'>
+Index: 579039 entries, 7 to 1215834
+Data columns (total 15 columns):
+ #   Column                 Non-Null Count   Dtype  
+---  ------                 --------------   -----  
+ 0   NUMERO                 579039 non-null  object 
+ 1   SEXE                   579039 non-null  object 
+ 2   ANNEE_BACC             579039 non-null  float64
+ 3   NATIONALITE            579039 non-null  object 
+ 4   SERIE_BACC             579039 non-null  object 
+ 5   ETABLISSMENT_CODE      579039 non-null  object 
+ 6   NIVEAU_SECTION         579039 non-null  object 
+ 7   ANNEE_INSCRIPTION      579039 non-null  int64  
+ 8   ANNEE UNIVERSITAIRE    579039 non-null  object 
+ 9   TYPE_FORMATION         579039 non-null  object 
+ 10  CODE_NIVEAU            579039 non-null  int64  
+ 11  NIVEAU LMD ET NON LMD  579039 non-null  object 
+ 12  SYSTEME                579039 non-null  object 
+ 13  DEPARTEMENT FORMATION  579039 non-null  object 
+ 14  RESULTAT               400944 non-null  object 
+dtypes: float64(1), int64(2), object(12)
+memory usage: 70.7+ MB
+\end{lstlisting}
+
 \section{Conclusion}

@@ -1,7 +1,16 @@
+\geometry{top=2.5cm, bottom=3cm, left=3cm, right=2.5cm} % Marges personnalisées
+
+\setlist[itemize]{label=\textbullet} % Puce des listes
+
+\pagestyle{fancy}                                   % Style de page personnalisé
+\fancyhf{}                                          % Suppression des en-têtes et pieds de page par défaut
+
 % L'en-tête
 \fancyhead[L]{\leftmark} % Titre de la section
 \renewcommand{\headrulewidth}{2pt}    % Épaisseur de la ligne
-\setlength{\headsep}{45pt}    % Distance entre l'en-tête et le texte
+\setlength{\headheight}{30pt} % Hauteur de l'en-tête
+\setlength{\headsep}{25pt}    % Distance entre l'en-tête et le texte
+
 % Modifier la couleur des lignes
 \makeatletter
 \renewcommand{\headrule}{\color{blue}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}
@@ -12,6 +21,7 @@
 \fancyfoot[C]{UCAD-FST-IMN} % Nom de l'établissement
 \fancyfoot[R]{\thepage}        % Numéro de page
 \renewcommand{\footrulewidth}{2pt}    % Épaisseur de la ligne
+\setlength{\footskip}{50pt}   % Distance entre le texte et le pied de page
 
 % Espacement entre les lignes
 \hyphenpenalty=10000
@@ -25,3 +35,9 @@
 
 \renewcommand{\lstlistingname}{Code}       % Change "Listing" en "Code"
 \renewcommand{\lstlistlistingname}{Table des codes}  % Titre de la table des codes
+
+\setcounter{tocdepth}{2} % Profondeur de la table des matières (1 pour sections, 2 pour sous-sections, etc.)
+
+\usetikzlibrary{shadows} % Ombres
+\setlength{\parskip}{15pt} % Espacement des paragraphes
+\setlength{\parindent}{15pt} % Indentation des paragraphes
