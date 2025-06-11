@@ -11,82 +11,83 @@ Cela inclut la détection et le traitement de valeurs aberrantes, la gestion des
 En parallèle, des opérations de préparation ont été menées pour structurer les données en vue de l’analyse. 
 Celles-ci comprennent la fusion de bases de données complémentaires (Les Inscrits et Résultats de UCAD), la standardisation des formats de certaines variables, ainsi que la création de nouvelles colonnes dérivées utiles à l’étude.
 
-Les sous-sections suivantes détaillent les étapes spécifiques effectuées lors de ce processus de nettoyage et de préparation.
+% Les sous-sections suivantes détaillent les étapes spécifiques effectuées lors de ce processus de nettoyage et de préparation.
 
-
-\newpage
 \section{Préparation de données des résultats du baccalauréat}
 
-Les données relatives aux résultats du baccalauréat ont été centralisées dans une table unique contenant plus de deux millions d’enregistrements, couvrant la période de 2006 à 2024. 
-Le code ci-dessous (~\ref{lst:info_bac}) donne un aperçu général de la structure du DataFrame après concaténation des fichiers annuels.
+Les données relatives aux résultats du baccalauréat ont été consolidées dans une table unique après concaténation de fichiers annuels couvrant la période de 2006 à 2024. 
+Cette base contient plus de deux millions d’enregistrements, représentant une volumétrie significative pour l’analyse.
+
+Le code ci-dessous (code~\ref{lst:info_bac}) donne un aperçu général de la structure du DataFrame après concaténation des fichiers annuels.
 \begin{lstlisting}[language=Python,
     caption=Informations général du DataFrame,
     label=lst:info_bac,
     basicstyle=\ttfamily\small,
     backgroundcolor=\color{gray!10}
 ]
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 2236490 entries, 0 to 2236489
-Data columns (total 15 columns):
- #   Column           Dtype 
----  ------           ----- 
- 0   nom              object
- 1   prenom           object
- 2   numero_table     object
- 3   serie            object
- 4   sexe             object
- 5   age              object
- 6   etablissement    object
- 7   type_candidat    object
- 8   resultat         object
- 9   acad_provenance  object
- 10  moy_finale       object
- 11  mention          object
- 12  abs              object
- 13  exclusion        object
- 14  year             object
-dtypes: object(15)
-memory usage: 255.9+ MB
+ <class 'pandas.core.frame.DataFrame'>
+ RangeIndex: 2236490 entries, 0 to 2236489
+ Data columns (total 15 columns):
+  #   Column           Dtype 
+ ---  ------           ----- 
+  0   nom              object
+  1   prenom           object
+  2   numero_table     object
+  3   serie            object
+  4   sexe             object
+  5   age              object
+  6   etablissement    object
+  7   type_candidat    object
+  8   resultat         object
+  9   acad_provenance  object
+  10  moy_finale       object
+  11  mention          object
+  12  abs              object
+  13  exclusion        object
+  14  year             object
+ dtypes: object(15)
+ memory usage: 255.9+ MB
 \end{lstlisting}
 
-On y retrouve des informations telles que le prénom, le nom, le numéro de table, la série, le sexe, l’âge, l'établissement, les résultats, la moyenne finale, la mention, etc. 
-On observe un total de 14 colonnes et 2236490 lignes.
-\newpage
+Cette base comprend des informations variées telles que le nom, le prénom, le numéro de table, la série, le sexe, l’âge, l’établissement d’origine, le type de candidat, les résultats obtenus, la mention, la moyenne finale, ainsi que l’année de passage. 
+Elle constitue une source clé pour l’analyse du taux de réussite et l’évaluation de l’impact des réformes introduites dans certaines séries.
+
 \subsection{Doublons dans la clé primaire \texttt{numero\_table}}
 
+L’identifiant principal des candidats étant le \texttt{numero\_table}, une vérification a été effectuée afin d’identifier d’éventuels doublons par année.
+
+\newpage
 \begin{lstlisting}[language=Python,
     caption=Nombre de numero\_table en doublon par année,
     label=lst:doublons,
     basicstyle=\ttfamily\small,
     backgroundcolor=\color{gray!10}
 ]
-Annee 2006 : 0 numeros apparaissent au moins deux fois
-Annee 2007 : 0 numeros apparaissent au moins deux fois
-Annee 2008 : 371 numeros apparaissent au moins deux fois
-Annee 2009 : 0 numeros apparaissent au moins deux fois
-Annee 2010 : 0 numeros apparaissent au moins deux fois
-Annee 2011 : 1 numeros apparaissent au moins deux fois
-Annee 2012 : 2 numeros apparaissent au moins deux fois
-Annee 2013 : 0 numeros apparaissent au moins deux fois
-Annee 2014 : 0 numeros apparaissent au moins deux fois
-Annee 2015 : 0 numeros apparaissent au moins deux fois
-Annee 2016 : 0 numeros apparaissent au moins deux fois
-Annee 2017 : 0 numeros apparaissent au moins deux fois
-Annee 2018 : 0 numeros apparaissent au moins deux fois
-Annee 2019 : 0 numeros apparaissent au moins deux fois
-Annee 2020 : 0 numeros apparaissent au moins deux fois
-Annee 2021 : 0 numeros apparaissent au moins deux fois
-Annee 2022 : 0 numeros apparaissent au moins deux fois
-Annee 2023 : 0 numeros apparaissent au moins deux fois
-Annee 2024 : 0 numeros apparaissent au moins deux fois 
+ Annee 2006 : 0 numeros apparaissent au moins deux fois
+ Annee 2007 : 0 numeros apparaissent au moins deux fois
+ Annee 2008 : 371 numeros apparaissent au moins deux fois
+ Annee 2009 : 0 numeros apparaissent au moins deux fois
+ Annee 2010 : 0 numeros apparaissent au moins deux fois
+ Annee 2011 : 1 numeros apparaissent au moins deux fois
+ Annee 2012 : 2 numeros apparaissent au moins deux fois
+ Annee 2013 : 0 numeros apparaissent au moins deux fois
+ Annee 2014 : 0 numeros apparaissent au moins deux fois
+ Annee 2015 : 0 numeros apparaissent au moins deux fois
+ Annee 2016 : 0 numeros apparaissent au moins deux fois
+ Annee 2017 : 0 numeros apparaissent au moins deux fois
+ Annee 2018 : 0 numeros apparaissent au moins deux fois
+ Annee 2019 : 0 numeros apparaissent au moins deux fois
+ Annee 2020 : 0 numeros apparaissent au moins deux fois
+ Annee 2021 : 0 numeros apparaissent au moins deux fois
+ Annee 2022 : 0 numeros apparaissent au moins deux fois
+ Annee 2023 : 0 numeros apparaissent au moins deux fois
+ Annee 2024 : 0 numeros apparaissent au moins deux fois 
 \end{lstlisting}
 
-Les résultats révèlent que la majorité des années ne présentent aucun doublon. Toutefois, quelques
-années, comme 2008 (371 doublons), 2011 (1) et 2012 (2) comportent des cas où deux
-candidats partagent le même numéro de table dans la même année. Cela peut s’expliquer par des
-erreurs de saisie ou des anomalies administratives.
+Les résultats révèlent que la majorité des années ne présentent aucun doublon. 
+Toutefois, quelques années, comme 2008 (371 doublons), 2011 (1) et 2012 (2) comportent des cas où deux candidats partagent le même numéro de table dans la même année.
 
-\begin{table}[h]
+\begin{table}[ht]
 \scriptsize
 \centering
 \caption{lignes avec les numéros en doublon en 2012}
@@ -103,19 +104,18 @@ CAMARA & 56513 & L'1 & M & 23 & LYCEE EL HADJ OMAR TALL & 07,17 \\
 \end{tabular}
 \end{table}
 
-Le tableau (table~\ref{tab:doublon}) illustre un exemple concret pour l’année 2012, où deux élèves de centres différents ont le même numéro de table mais des informations distinctes. 
-Ces cas ont été traités avec prudence dans la suite des analyses.
+Le tableau (table~\ref{tab:doublon}) illustre deux exemples de doublons survenus en 2012.\\
+On observe que, bien que les numéros de table soient identiques, les profils associés sont différents (noms, âges, établissements, moyennes, etc.).
+Ces doublons ne traduisent donc pas des répétitions, mais plutôt des erreurs de saisie ou des anomalies dans l’attribution des identifiants.
 
-\textbf{Remarque :}
-
-On remarque qu’il ne s’agit pas de doublons exacts, mais de personnes différentes à qui le même numéro de table a été attribué.
-
-\newpage
 \subsection{Les valeurs manquantes dans les colonnes}
 
-\begin{table}[h]
-\hspace{5cm}
+L’analyse du DataFrame révèle la présence de valeurs manquantes dans plusieurs variables. Le tableau (table~\ref{tab:valeurs_nulles}) en présente la répartition par colonne.
+
+\begin{table}[ht]
+\centering
 \caption{Valeurs manquantes dans les colonnes du DataFrame des résultats du bac}
+\label{tab:valeurs_nulles}
 \begin{tabular}{lr}
 \toprule
 Colonnes & nb\_valeur\_null \\
@@ -141,9 +141,12 @@ year & 0 \\
 
 \subsubsection{Valeurs manquantes dans la colonne \texttt{moy\_finale}}
 
-\begin{table}[h]
-\hspace{5cm}
+La colonne \texttt{moy\_finale}, qui contient la moyenne finale obtenue par les candidats, comporte 11 valeurs manquantes (table~\ref{tab:null_moyenne}).
+
+\begin{table}[ht]
+\centering
 \caption{Valeurs manquantes dans la colonne moy\_finale}
+\label{tab:null_moyenne}
 \begin{tabular}{lrllr}
 \toprule
 nom & numero\_table & resultat & moy\_finale \\
@@ -163,14 +166,25 @@ KANE & NaN & NaN & NaN \\
 \end{tabular}
 \end{table}
 
+Ces lignes, souvent associées à des candidats absents ou exclus, ont été supprimées afin d’éviter tout biais dans l’analyse statistique et les modélisations
+
 \subsubsection{Valeurs manquantes dans la colonne \texttt{resultat}}
 
-\textbf{Les valeurs possibles dans la colonne \texttt{resultat}}
+La colonne \texttt{resultat} contient 3\,977 valeurs manquantes (table~\ref{tab:valeurs_nulles}). 
+Après vérification croisée avec les colonnes \texttt{abs} et \texttt{exclusion}, il s’avère que ces absences de valeurs concernent exclusivement des candidats exclus ou absents. 
+Par souci de cohérence, toutes les valeurs manquantes ont été remplacées par \textbf{0}, conformément à la signification officielle des résultats :
 
-\newpage
+\begin{itemize}
+    \item \textbf{111} : Admis d’office avec mention ;
+    \item \textbf{101} : Admis après le second tour ;
+    \item \textbf{100} : Passé au second tour sans succès ;
+    \item \textbf{10} : Échec direct (moyenne insuffisante dès le premier tour) ;
+    \item \textbf{0} : Absent, exclu ou dossier incomplet.
+\end{itemize}
+
 \subsection{Correction du type de la colonne \texttt{moy\_finale}}
 
-Comme on peut le constater dans le code présenté (listing~\ref{lst:info_bac}), le type initial de la colonne \texttt{moy\_finale} n'était pas exploitable tel quel. 
+Comme on peut le constater dans le code présenté (code~\ref{lst:info_bac}), le type initial de la colonne \texttt{moy\_finale} n'était pas exploitable tel quel. 
 En effet, certaines valeurs contenaient des tirets, d'autres utilisaient des virgules comme séparateur décimal, et certaines étaient tout simplement vides ou non numériques.
 
 \begin{lstlisting}[language=Python,
@@ -179,15 +193,15 @@ En effet, certaines valeurs contenaient des tirets, d'autres utilisaient des vir
     basicstyle=\ttfamily\small,
     backgroundcolor=\color{gray!10}
 ]
-all_data_filtre['moy_finale'] = (
+ all_data_filtre['moy_finale'] = (
     all_data_filtre['moy_finale']
-    .astype(str) # Convertir en chaine de caracteres
-    .str.replace('-', '', regex=False) # Supprimer les tirets
-    .str.replace(',', '.', regex=False) # les virgules en points
-    .str.strip() # Supprimer les espaces au debut et fin de chaine
-    .replace({'': None, 'nan': None}) # Supprimer les chaines vides
-    .astype(float) # Convertir en float
-)
+    .astype(str)                         # Convertir en string
+    .str.replace('-', '', regex=False)   # Supprimer les tirets
+    .str.replace(',', '.', regex=False)  # les virgules en points
+    .str.strip()                         # Supprimer les espaces
+    .replace({'': None, 'nan': None})    # Supprimer les chaines vides
+    .astype(float)                       # Convertir en float
+    )
 \end{lstlisting}
 
 Pour rendre cette colonne exploitable statistiquement, plusieurs opérations de nettoyage ont été effectuées :
@@ -199,15 +213,13 @@ Pour rendre cette colonne exploitable statistiquement, plusieurs opérations de 
 \item Conversion finale de la colonne en type \texttt{float}.
 \end{itemize}
 
-Ces étapes garantissent la cohérence de la variable \texttt{moy\_finale} pour les analyses statistiques à venir.
-
-\newpage
 \subsection{Création des colonnes \texttt{admis} et \texttt{session}}
 
-Pour faciliter les analyses, deux nouvelles colonnes ont été dérivées de la variable \texttt{resultat} :
+Dans le but de simplifier l’analyse et d’améliorer la lisibilité des résultats, deux nouvelles colonnes ont été dérivées à partir de la variable \texttt{resultat} :
+
 \begin{itemize}
-\item La colonne \texttt{admis}, indiquant si un candidat est admis ou non. Les codes \texttt{'111'} et \texttt{'101'} ont été interprétés comme signifiant « admis ».
-\item La colonne \texttt{session}, précisant s’il s’agit du premier ou du second tour, en se basant sur les mêmes codes.
+    \item \texttt{admis} : indique si un candidat a été admis ou non. Les codes \texttt{111} (admis d’office avec mention) et \texttt{101} (admis au second tour) sont considérés comme « admis », les autres comme « non admis ».
+    \item \texttt{session} : précise la session de réussite du candidat. Le code \texttt{111} correspond au « 1er Tour », et le code \texttt{101} au « 2e Tour ».
 \end{itemize}
 
 \begin{lstlisting}[language=Python,
@@ -216,37 +228,32 @@ Pour faciliter les analyses, deux nouvelles colonnes ont été dérivées de la 
     basicstyle=\ttfamily\small,
     backgroundcolor=\color{gray!10}
 ]
-# Creation de la colonne 'admis' de 'resultat'
-all_data['admis'] = all_data['resultat'].apply(lambda x: 'admis' 
-                            if pd.notna(x) and x in ['111', '101'] 
-                            else 'non admis')
+ # Creation de la colonne 'admis' de 'resultat'
+ all_data['admis'] = all_data['resultat'].apply(lambda x: 'admis' 
+                              if pd.notna(x) and x in ['111', '101'] 
+                              else 'non admis'
+                              )
 
-# Creation de la colonne 'session' de 'admis'
-all_data['session'] = all_data['resultat'].apply(
-                            lambda x: '1er Tour' 
-                            if pd.notna(x) and x == '111' 
-                            else ('2e Tour' 
-                                if pd.notna(x) 
-                                and x == '101' else ''))
+ # Creation de la colonne 'session' de 'admis'
+ all_data['session'] = all_data['resultat'].apply(lambda x: '1er Tour' 
+                                if pd.notna(x) and x == '111' 
+                                else ('2e Tour' 
+                                      if pd.notna(x) and x == '101' 
+                                      else ''
+                                    ))
 \end{lstlisting}
 
-Ce pré-traitement permet d’améliorer la lisibilité des résultats, notamment dans les agrégations et visualisations.
-
-\subsection{creation du dataFrame récapitulatif}
-
-\newpage
 \section{Fusion des données des Inscrits et des Résultats de l’UCAD}
 
 \subsection{Données des inscriptions à l’UCAD}
 
 Les données d’inscription utilisées dans cette étude couvrent la période de 2002 à 2024. 
 Cependant, pour garantir la cohérence avec les données de résultats (disponibles uniquement de 2011 à 2024), 
-nous avons retenu uniquement les inscriptions allant de 2011 à 2023.
+nous avons retenu uniquement les inscriptions allant de 2011 à 2024.
 
 La sortie de code \ref{lst:inscription_ucad} présente un aperçu global de la base de données des inscriptions à l’UCAD pour les années universitaires allant de 2011 à 2023. 
-Elle contient 1 141 120 enregistrements répartis sur 20 variables. Les variables \textit{NUMERO} et \textit{ANNEE UNIVERSITAIRE}, 
-constituent les clés essentielles pour la fusion avec la base des résultats académiques.
-
+Elle contient 1 141 120 enregistrements répartis sur 13 variables. 
+Les variables \textit{NUMERO} et \textit{ANNEE UNIVERSITAIRE}, constituent les clés essentielles pour la fusion avec la base des résultats académiques.
 
 \begin{lstlisting}[language=Python,
     caption=Info global du data des inscriptions, 
@@ -254,35 +261,34 @@ constituent les clés essentielles pour la fusion avec la base des résultats ac
     basicstyle=\ttfamily\footnotesize, 
     backgroundcolor=\color{gray!10}
 ]
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1141120 entries, 0 to 1141119
-Data columns (total 14 columns):
- #   Column                 Non-Null Count    Dtype  
----  ------                 --------------    -----  
- 0   NUMERO                 1141120 non-null  object 
- 1   SEXE                   1141120 non-null  object 
- 2   ANNEE_BACC             1136174 non-null  float64
- 3   NATIONALITE            1141120 non-null  object 
- 4   SERIE_BACC             1109114 non-null  object 
- 5   ETABLISSMENT_CODE      1141120 non-null  object 
- 6   NIVEAU_SECTION         1141120 non-null  object 
- 7   ANNEE_INSCRIPTION      1141120 non-null  int64  
- 8   ANNEE_UNIVERSITAIRE    1141120 non-null  object 
- 9   TYPE_FORMATION         1141120 non-null  object 
- 10  CODE_NIVEAU            1141120 non-null  int64  
- 11  NIVEAU LMD ET NON LMD  1141120 non-null  object 
- 12  SYSTEME                1141120 non-null  object 
- 13  DEPARTEMENT FORMATION  1141120 non-null  object 
-dtypes: float64(1), int64(2), object(11)
-memory usage: 121.9+ MB
+ <class 'pandas.core.frame.DataFrame'>
+ RangeIndex: 1141120 entries, 0 to 1141119
+ Data columns (total 14 columns):
+  #   Column                 Non-Null Count    Dtype  
+ ---  ------                 --------------    -----  
+  0   NUMERO                 1141120 non-null  object 
+  1   SEXE                   1141120 non-null  object 
+  2   ANNEE_BACC             1136174 non-null  float64
+  3   NATIONALITE            1141120 non-null  object 
+  4   SERIE_BACC             1109114 non-null  object 
+  5   ETABLISSMENT_CODE      1141120 non-null  object 
+  6   NIVEAU_SECTION         1141120 non-null  object 
+  7   ANNEE_INSCRIPTION      1141120 non-null  int64  
+  8   ANNEE_UNIVERSITAIRE    1141120 non-null  object 
+  9   TYPE_FORMATION         1141120 non-null  object 
+  10  CODE_NIVEAU            1141120 non-null  int64  
+  11  NIVEAU LMD ET NON LMD  1141120 non-null  object 
+  12  SYSTEME                1141120 non-null  object 
+  13  DEPARTEMENT FORMATION  1141120 non-null  object 
+ dtypes: float64(1), int64(2), object(11)
+ memory usage: 121.9+ MB
 \end{lstlisting}
 
-\newpage
 \subsection{Données des résultats de l’UCAD}
 
 La sortie de code \ref{lst:resultat_ucad} présente les informations générales de la base de données contenant les résultats universitaires des étudiants de l’UCAD. 
-Cette base couvre la période allant de 2010 à 2024, et concerne uniquement les établissements ayant effectué leurs délibérations sur la plateforme institutionnelle de la DISI. 
-On y retrouve un total de 753 828 enregistrements répartis sur 27 colonnes.
+Cette base couvre la période allant de 2011 à 2024, et concerne uniquement les établissements ayant effectué leurs délibérations sur la plateforme institutionnelle de la DISI. 
+C’est pourquoi le fichier ne contient que 753 693 enregistrements, un total largement inférieur aux 1 141 120 inscrits.
 
 \begin{lstlisting}[language=Python,
     caption=Info global du data des résultats, 
@@ -290,23 +296,22 @@ On y retrouve un total de 753 828 enregistrements répartis sur 27 colonnes.
     basicstyle=\ttfamily\footnotesize, 
     backgroundcolor=\color{gray!10}
 ]
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 753693 entries, 0 to 753692
-Data columns (total 3 columns):
- #   Column               Non-Null Count   Dtype 
----  ------               --------------   ----- 
- 0   NUMERO               753693 non-null  object
- 1   ANNEE UNIVERSITAIRE  753693 non-null  object
- 2   RESULTAT             753562 non-null  object
-dtypes: object(3)
-memory usage: 17.3+ MB
+ <class 'pandas.core.frame.DataFrame'>
+ RangeIndex: 753693 entries, 0 to 753692
+ Data columns (total 3 columns):
+  #   Column               Non-Null Count   Dtype 
+ ---  ------               --------------   ----- 
+  0   NUMERO               753693 non-null  object
+  1   ANNEE UNIVERSITAIRE  753693 non-null  object
+  2   RESULTAT             753562 non-null  object
+ dtypes: object(3)
+ memory usage: 17.3+ MB
 \end{lstlisting}
 
-\newpage
 \subsection{Fusion des données d’inscription et de résultats}
 
-Pour fusionner les bases de données d’inscription et de résultats, 
-les colonnes \textit{NUMERO} et \textit{ANNEE UNIVERSITAIRE} ont été utilisées comme clés de jointure. 
+Pour combiner les données d’inscription et les résultats académiques des étudiants de l’UCAD,
+ une jointure a été effectuée en utilisant les colonnes \texttt{NUMERO} (identifiant étudiant) et \texttt{ANNEE UNIVERSITAIRE} comme clés.
 
 \begin{lstlisting}[language=Python,
     caption=Jointure des données d’inscription et de résultats,
@@ -314,15 +319,15 @@ les colonnes \textit{NUMERO} et \textit{ANNEE UNIVERSITAIRE} ont été utilisée
     basicstyle=\ttfamily\small,
     backgroundcolor=\color{gray!10}
 ]
-df_final = pd.merge(df_inscrit, # Premier DataFrame
-           df_resultat, # Deuxieme DataFrame
+ df_final = pd.merge(df_inscrit,                 # Premier DataFrame
+           df_resultat,                          # Deuxieme DataFrame
            on=['NUMERO', 'ANNEE UNIVERSITAIRE'], # Cles de jointure
-           how='left' # garde toutes les lignes de df_inscrit
+           how='left'                            # le type de jointure
             ) 
 \end{lstlisting}
 
-La fusion a été réalisée à l’aide de l’option \texttt{how='left'} pour conserver l’ensemble des inscrits, 
-y compris ceux pour lesquels aucun résultat académique n’est disponible.
+La jointure a été réalisée à l’aide de l’option \texttt{left} pour garantir la conservation de l’ensemble des inscriptions, 
+y compris celles des étudiants dont les résultats n’ont pas été délibérés ou publiés sur la plateforme académique de la DISI
 
 \begin{lstlisting}[language=Python,
     caption=Info global du data des inscriptions et résultats, 
@@ -330,95 +335,103 @@ y compris ceux pour lesquels aucun résultat académique n’est disponible.
     basicstyle=\ttfamily\footnotesize, 
     backgroundcolor=\color{gray!10}
 ]
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1215837 entries, 0 to 1215836
-Data columns (total 15 columns):
- #   Column                 Non-Null Count    Dtype  
----  ------                 --------------    -----  
- 0   NUMERO                 1215837 non-null  object 
- 1   SEXE                   1215837 non-null  object 
- 2   ANNEE_BACC             1210891 non-null  float64
- 3   NATIONALITE            1215837 non-null  object 
- 4   SERIE_BACC             1183525 non-null  object 
- 5   ETABLISSMENT_CODE      1215837 non-null  object 
- 6   NIVEAU_SECTION         1215837 non-null  object 
- 7   ANNEE_INSCRIPTION      1215837 non-null  int64  
- 8   ANNEE UNIVERSITAIRE    1215837 non-null  object 
- 9   TYPE_FORMATION         1215837 non-null  object 
- 10  CODE_NIVEAU            1215837 non-null  int64  
- 11  NIVEAU LMD ET NON LMD  1215837 non-null  object 
- 12  SYSTEME                1215837 non-null  object 
- 13  DEPARTEMENT FORMATION  1215837 non-null  object 
- 14  RESULTAT               750198 non-null   object 
-dtypes: float64(1), int64(2), object(12)
-memory usage: 139.1+ MB
+ <class 'pandas.core.frame.DataFrame'>
+ RangeIndex: 1215837 entries, 0 to 1215836
+ Data columns (total 15 columns):
+  #   Column                 Non-Null Count    Dtype  
+ ---  ------                 --------------    -----  
+  0   NUMERO                 1215837 non-null  object 
+  1   SEXE                   1215837 non-null  object 
+  2   ANNEE_BACC             1210891 non-null  float64
+  3   NATIONALITE            1215837 non-null  object 
+  4   SERIE_BACC             1183525 non-null  object 
+  5   ETABLISSMENT_CODE      1215837 non-null  object 
+  6   NIVEAU_SECTION         1215837 non-null  object 
+  7   ANNEE_INSCRIPTION      1215837 non-null  int64  
+  8   ANNEE UNIVERSITAIRE    1215837 non-null  object 
+  9   TYPE_FORMATION         1215837 non-null  object 
+  10  CODE_NIVEAU            1215837 non-null  int64  
+  11  NIVEAU LMD ET NON LMD  1215837 non-null  object 
+  12  SYSTEME                1215837 non-null  object 
+  13  DEPARTEMENT FORMATION  1215837 non-null  object 
+  14  RESULTAT               750198 non-null   object 
+ dtypes: float64(1), int64(2), object(12)
+ memory usage: 139.1+ MB
 \end{lstlisting}
 
-Cela explique la présence d’un grand nombre de valeurs manquantes dans la colonne \textit{RESULTAT}, 
-notamment pour les étudiants dont les résultats n'ont pas encore été délibérés ou publiés sur la plateforme.
+On observe que la colonne \texttt{RESULTAT} contient un nombre important de valeurs manquantes qui s’explique par le fait que certains établissements ne délibéresnt via la plateforme de la DISI.
+C'est pourquoi, ils avaient moins de lignes dans la même periode dans les données des resultats.
 
-\newpage
 \section{Filtage des données}
 
-Afin de concentrer l’analyse sur la population cible et sur les éléments pertinents pour notre étude, 
-une étape de filtrage rigoureuse des données a été nécessaire. 
-Cette étape vise à exclure les individus et les séries qui ne rentrent pas dans le périmètre de l’étude.
+Afin de concentrer l’analyse sur la population cible et les séries directement concernées par les réformes du baccalauréat, une étape de filtrage rigoureuse a été appliquée aux bases de données. 
+L’objectif est d’exclure les individus et les séries ne correspondant pas au périmètre de l’étude.
 
 \subsection{Nationalité}
 
-La variable \textit{NATIONALITE} a été filtrée pour ne conserver que les étudiants de nationalité sénégalaise.
-Seuls les candidats de nationalité sénégalaise ont été retenus. 
-Cela permet de mieux étudier l’impact des réformes du baccalauréat sur les élèves du système éducatif sénégalais.
+La variable \texttt{NATIONALITE} a été filtrée pour ne conserver que les étudiants de nationalité sénégalaise. 
+Ce choix permet de se concentrer sur les élèves issus du système éducatif sénégalais, et d’évaluer plus précisément l’effet des réformes nationales sur leurs trajectoires.
 
 \subsection{Séries du baccalauréat}
-La variable \textit{SERIE\_BACC} a été filtrée pour ne conserver que les séries pertinentes pour l’analyse.
 
-Nous avons sélectionné uniquement les séries concernées par les réformes étudiées et pertinentes dans le contexte de l’enseignement général ou technique, telles que :
+L’étude porte principalement sur les séries impactées par les réformes éducatives récentes, notamment l’introduction du baccalauréat arabe (2013) et de la série STEG (2019). Ainsi, seules les séries suivantes ont été retenues :
+
 \begin{itemize}
-\item L1 (Littéraire 1)
-\item L2 (Littéraire 2)
-\item S1 (Scientifique 1)
-\item S2 (Scientifique 2)
-\item T1 (Technique 1)  
-\item T2 (Technique 2)
-\item T3 (Technique 3)
-\item T4 (Technique 4)
+    \item \textbf{Séries arabes} : \texttt{L1-AR}, \texttt{S1-AR}, \texttt{S2-AR} ;
+    \item \textbf{Séries franco-arabes} : \texttt{LA}, \texttt{S1A}, \texttt{S2A} ;
+    \item \textbf{Série STEG} : \texttt{STEG} ;
+    \item \textbf{Série G} : \texttt{G} (anciennement série G, remplacée progressivement par la STEG) ;
+    \item \textbf{Séries de référence (littéraire et scientifique)} :
+        \begin{itemize}
+            \item \texttt{L'1} : utilisée comme référence pour les séries littéraires non arabes ;
+            \item \texttt{S1} et \texttt{S2} : références pour les filières scientifiques.
+        \end{itemize}
 \end{itemize}
+
+Ce choix permet de comparer les performances et parcours entre les anciennes séries, les nouvelles séries réformées, et les séries de référence.
 
 \subsection{Niveau universitaire}
 
-Seuls les étudiants inscrits en L1, L2 ou L3, correspondant au premier cycle universitaire, ont été retenus. 
-Cela permet d’observer directement les effets des réformes du baccalauréat sur les premières années d’insertion universitaire.
+L’analyse se limite aux étudiants inscrits dans le \textbf{premier cycle universitaire}, c’est-à-dire les niveaux \texttt{L1}, \texttt{L2} et \texttt{L3}. 
+Ce choix vise à observer les effets immédiats et à court terme des réformes du baccalauréat sur l’insertion et la progression dans les premières années à l’université.
 
-\newpage
+\subsection{DataFrame final}
+
+Après l’ensemble des étapes de filtrage, de nettoyage et de fusion, le \texttt{DataFrame} final contient un total de 579\,039 enregistrements correspondant à des étudiants de nationalité sénégalaise, inscrits à l’UCAD entre 2011 et 2024, issus des séries ciblées, et se situant dans le premier cycle universitaire.
+
 \begin{lstlisting}[language=Python,
     caption=Filtrage des données,
     label=lst:filtrage,
     basicstyle=\ttfamily\small,
     backgroundcolor=\color{gray!10}
 ]
-<class 'pandas.core.frame.DataFrame'>
-Index: 579039 entries, 7 to 1215834
-Data columns (total 15 columns):
- #   Column                 Non-Null Count   Dtype  
----  ------                 --------------   -----  
- 0   NUMERO                 579039 non-null  object 
- 1   SEXE                   579039 non-null  object 
- 2   ANNEE_BACC             579039 non-null  float64
- 3   NATIONALITE            579039 non-null  object 
- 4   SERIE_BACC             579039 non-null  object 
- 5   ETABLISSMENT_CODE      579039 non-null  object 
- 6   NIVEAU_SECTION         579039 non-null  object 
- 7   ANNEE_INSCRIPTION      579039 non-null  int64  
- 8   ANNEE UNIVERSITAIRE    579039 non-null  object 
- 9   TYPE_FORMATION         579039 non-null  object 
- 10  CODE_NIVEAU            579039 non-null  int64  
- 11  NIVEAU LMD ET NON LMD  579039 non-null  object 
- 12  SYSTEME                579039 non-null  object 
- 13  DEPARTEMENT FORMATION  579039 non-null  object 
- 14  RESULTAT               400944 non-null  object 
-dtypes: float64(1), int64(2), object(12)
-memory usage: 70.7+ MB
+ <class 'pandas.core.frame.DataFrame'>
+ Index: 579039 entries, 7 to 1215834
+ Data columns (total 15 columns):
+  #   Column                 Non-Null Count   Dtype  
+ ---  ------                 --------------   -----  
+  0   NUMERO                 579039 non-null  object 
+  1   SEXE                   579039 non-null  object 
+  2   ANNEE_BACC             579039 non-null  float64
+  3   NATIONALITE            579039 non-null  object 
+  4   SERIE_BACC             579039 non-null  object 
+  5   ETABLISSMENT_CODE      579039 non-null  object 
+  6   NIVEAU_SECTION         579039 non-null  object 
+  7   ANNEE_INSCRIPTION      579039 non-null  int64  
+  8   ANNEE UNIVERSITAIRE    579039 non-null  object 
+  9   TYPE_FORMATION         579039 non-null  object 
+  10  CODE_NIVEAU            579039 non-null  int64  
+  11  NIVEAU LMD ET NON LMD  579039 non-null  object 
+  12  SYSTEME                579039 non-null  object 
+  13  DEPARTEMENT FORMATION  579039 non-null  object 
+  14  RESULTAT               400944 non-null  object 
+ dtypes: float64(1), int64(2), object(12)
+ memory usage: 70.7+ MB
 \end{lstlisting}
 
 \section{Conclusion}
+
+Ce chapitre a permis de mettre en place une base de données propre, cohérente et ciblée, indispensable pour mener les analyses ultérieures.
+
+Le \texttt{DataFrame} final obtenu constitue le socle de notre étude. Il résulte de la liaison entre les données d’inscription à l’UCAD, qui contiennent les informations sur les séries et années du baccalauréat des étudiants, et les données de résultats universitaires.
+Cette intégration permet de relier les parcours académiques aux caractéristiques du bac.

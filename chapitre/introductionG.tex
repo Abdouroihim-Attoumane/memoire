@@ -16,35 +16,63 @@ Ce paradoxe entre le nombre croissant de candidats et la stagnation du taux de r
 Dans ce contexte, plusieurs réformes majeures ont été introduites : l’instauration du baccalauréat arabo-français en 2000, la création du bac arabe en 2013, 
 et la transformation de la série G en série STEG (Sciences et Techniques de la Gestion) en 2019. 
 Ces réformes traduisent la volonté des autorités d’élargir les opportunités d’accès à l’enseignement supérieur, de diversifier les profils de bacheliers, 
-et d'améliorer l'adéquation entre formation et marché du travail. Ce mémoire se propose d’évaluer l’impact réel de ces transformations sur le taux de réussite au baccalauréat et sur l’insertion universitaire des bacheliers, notamment à l'UCAD.
+et d'améliorer l'adéquation entre formation et marché du travail. Ce mémoire se propose d’évaluer l’impact réel de ces transformations sur le taux de réussite au baccalauréat et sur le parcours universitaire des bacheliers, notamment à l'UCAD.
 
 \section*{Problématique et Objectifs de l'étude}
 \addcontentsline{toc}{section}{Problématique et Objectifs de l'étude}
 
-Les réformes éducatives ont-elles permis de redynamiser le baccalauréat sénégalais et d’améliorer l’accès à l’enseignement supérieur ? 
-Malgré l’intention affichée de moderniser le système et de le rendre plus inclusif, plusieurs interrogations subsistent :
+Les réformes successives du baccalauréat sénégalais, notamment l’introduction du bac arabe en 2013 et de la série STEG en 2019,
+ont été motivées par la volonté de moderniser le système éducatif, de mieux adapter l’offre de formation aux besoins socio-économiques du pays et de favoriser l’inclusion. 
+Toutefois, leur impact réel reste encore peu documenté de manière rigoureuse.
+
+Une question centrale se pose :
+
+\textbf{Ces réformes ont-elles réellement contribué à améliorer les performances au baccalauréat et à faciliter le parcours universitaire des nouveaux bacheliers ?}
+
+Plusieurs interrogations découlent de cette problématique :
 \begin{itemize}
-    \item Ces réformes ont-elles eu un impact significatif sur les taux de réussite ?
+    \item Les réformes ont-elles eu un effet mesurable sur les taux de réussite au baccalauréat, globalement et par série ?
     \item Comment les nouvelles séries, comme le bac arabe ou la série STEG, se positionnent-elles en termes de performances au bac ?
     \item Comment les bacheliers issus des séries arabes évoluent-ils dans l’enseignement supérieur, notamment à l’UCAD ?
     \item Existe-t-il des disparités significatives entre les différentes séries du baccalauréat en termes de réussite et d’insertion à l'UCAD ?
 \end{itemize}
 
-C'est à l'analyse de ces questions que s'attelle cette étude.
-Ce travail vise ainsi à combler un manque crucial d’évaluation quantitative des réformes éducatives, 
-tout en proposant des outils analytiques pour guider les futures politiques publiques. 
-En croisant l’exploitation de données massives (résultats du bac, inscriptions à l’UCAD) et des méthodes avancées de data science, 
-il offre une vision factuelle pour optimiser l’efficacité du système éducatif sénégalais.
+À travers une analyse des données du baccalauréat (2006–2024) et des inscriptions à l’UCAD (2002–2024), ce travail poursuit plusieurs objectifs :
+\begin{itemize}
+    \item \textbf{Analyser l’évolution des taux de réussite au bac}, avec une attention particulière aux périodes post-réformes.
+    \item \textbf{Modéliser et prédire les taux de réussite} pour estimer ce qu’ils auraient été sans réformes (approche contrefactuelle).
+    \item \textbf{Étudier le parcours universitaire des bacheliers (suivi de cohortes)}, en identifiant les départements, filières et performances selon les séries d’origine.
+    \item Fournir des \textbf{recommandations basées sur les données} pour orienter les politiques éducatives futures.
+\end{itemize}
+
+Ce travail vise ainsi à combler un manque crucial d’évaluation quantitative des réformes éducatives,
+en mobilisant des méthodes statistiques, des modèles prédictifs et des visualisations, pour offrir une lecture factuelle et visuelle des effets des réformes, afin d’éclairer la prise de décision dans le secteur éducatif.
 
 \section*{Méthodologie et Organisation du document}
 \addcontentsline{toc}{section}{Méthodologie et Organisation du document}
 
-%Ce mémoire est structuré comme suit :
+Cette étude repose sur une démarche méthodologique structurée, combinant analyse statistique, modélisation prédictive et visualisation avancée. L’objectif est d’évaluer de manière quantitative et visuelle l’impact des réformes du baccalauréat sur la réussite scolaire et le parcours universitaire.
+\newpage
+La méthodologie adoptée comprend :
+
+\begin{itemize}
+    \item Une \textbf{revue des réformes éducatives} ayant marqué le baccalauréat sénégalais.
+    \item L’exploitation de trois grandes bases de données : les \textbf{résultats du baccalauréat} (2006–2024), les \textbf{inscriptions universitaires à l’UCAD} (2002–2024) et les \textbf{résultats universitaires à l’UCAD} (2011–2024).
+    \item Une \textbf{analyse descriptive et prédictive}, appuyée par des représentations visuelles riches afin de faciliter la compréhension et l’interprétation des résultats.
+    \item Un \textbf{suivi longitudinal des cohortes} de bacheliers à l’université, avec une attention particulière portée aux différences selon les séries d’origine.
+    \item Une \textbf{restitution interactive} à l’aide de tableaux de bord dynamiques réalisés avec Power BI.
+\end{itemize}
+
+
+Le document est organisé en six chapitres principaux, suivis d'une section dédiée à la conclusion et aux recommandations, suivant la logique de cette démarche :
+
 \begin{enumerate}
-    \item Le premier chapitre présente l'état de l’art sur les réformes du baccalauréat au Sénégal,...
-    \item Le deuxième chapitre présente les données et outils utilisés, détaillant les outils statistiques et analytiques utilisés pour évaluer l'impact des réformes.
-    \item Le troisième chapitre traite l'exploration et la préparation des données,...
-    \item Le quatrième chapitre présente l'analyse statistique des impacts des réformes,...
-    \item Le cinquième chapitre présente le Dashboard Power Bi de visualisation des résultats au baccalauréat de 2006 à 2024 à fin de facilité toute nouvelle étude.
-    \item Enfin, mes recommandations et conclusions sont présentées, soulignant les implications de cette étude pour les politiques éducatives futures.
+    \item \textbf{État de l’art} : Présentation des réformes du baccalauréat et revue des études antérieures sur le sujet.
+    \item \textbf{Données et outils utilisés} : Description des sources de données et des outils mobilisés.
+    \item \textbf{Nettoyage et préparation des données} : Traitement, fusion et structuration des données pour les rendre exploitables.
+    \item \textbf{Analyse du taux de réussite au bac} : lecture visuelle et modélisation des taux avec simulations.
+    \item \textbf{Analyse du parcours universitaire et suivi de cohortes} : visualisation du cheminement des bacheliers à l’UCAD.
+    \item \textbf{Restitution interactive et visualisation} : Présentation des dashboard Power BI, incluant les filtres dynamiques, mesures, colonnes conditionnelles et visualisations interactives.
 \end{enumerate}
+
+\textbf{Conclusion et recommandations} : Bilan général de l’étude, limites rencontrées et propositions pour renforcer l’efficacité des politiques éducatives.

@@ -4,20 +4,20 @@
 \begin{document}
 % Page de garde
 \begin{titlepage}
-    \newgeometry{top=0cm, bottom=0cm, left=2cm, right=2cm} % Marges spécifiques à la page de garde
+    \newgeometry{top=0cm, bottom=0cm, left=1.5cm, right=0.5cm} % Marges spécifiques à la page de garde
     \begin{tikzpicture}[remember picture, overlay]
         \fill[bleufonce] ([xshift=1cm]current page.north west) rectangle ([xshift=2cm,yshift=-6cm]current page.north west); % Rectangle en haut à gauche
         \fill[blue] (current page.north east) -- ([xshift=-1cm]current page.north east) -- ([yshift=-10cm]current page.north east) -- cycle; % Triangle en haut à droite
-        \fill[blue] ([xshift=1cm] current page.south west) rectangle ([xshift=2cm,yshift=12cm]current page.south west); % Rectangle en bas à gauche
+        \fill[blue] ([xshift=1cm] current page.south west) rectangle ([xshift=2cm,yshift=11cm]current page.south west); % Rectangle en bas à gauche
         \fill[bleufonce] (current page.south east) -- ([xshift=-1cm]current page.south east) -- ([yshift=10cm]current page.south east) -- cycle; % Triangle en bas à droite
     \end{tikzpicture}
     \begin{center}
-        \begin{minipage}{0.95\textwidth}
+        \begin{minipage}{0.92\textwidth}
             \includegraphics[width=7cm]{images/logo_fst_1.png}
             \hfill
             \includegraphics[width=3cm]{images/logo_ubs.png}
-        \end{minipage}\\[0.5cm]
-        \includegraphics[width=6cm]{images/logo_campus.png}\\[0.5cm]
+        \end{minipage}\\[0.1cm]
+        \includegraphics[width=6cm]{images/logo_campus.png}\\[1cm]
         \HRule \\[0.5cm]
         \textcolor{bleufonce}{\textbf{\textsc{\LARGE Mémoire de Recherche de II CYCLE}}} \\[1.5cm]
         \begin{tcolorbox}[
@@ -29,24 +29,24 @@
             width=18cm,
             fontupper=\color{white}, 
             center title, 
-            drop shadow={black!50!white, shadow xshift=2pt, shadow yshift=--2pt,opacity=0.6}
+            drop shadow={black!50!white, shadow xshift=2.5pt, shadow yshift=--2pt,opacity=0.6}
             ]
             \centering
-            \textbf{\LARGE Analyse de l'impact des dernières réformes du baccalauréat au Sénégal sur le taux de réussite au Bac et l’insertion universitaire}
+            \textbf{\LARGE Analyse de l'impact des récentes réformes du baccalauréat au Sénégal sur le taux de réussite au bac et le parcours universitaire des bacheliers}
         \end{tcolorbox}
-        \vspace{1cm}
+        \vspace{1.5cm}
         \textbf{\textit{\large Présenté et soutenu par:}}\\[0.5cm]
         \textcolor{blue}{\textbf{\LARGE ABDOUROIHIM Attoumane}}
     \end{center}
     \vspace{1cm}
     \begin{flushleft}
-        \hspace{0.1cm} 
+        \hspace{0.5cm} 
         \textmd{\large Pour l'obtention du double diplôme de \textbf{\Large Master 2},}
         \begin{center}
             \textmd{\Large \textcolor{blue}{\textbf{D'Ingénierie Mathématique et Numérique}}}
         \end{center}
         \vspace{0.5cm}
-        \hspace{0.1cm}
+        \hspace{0.5cm}
         \textmd{\large Sous la direction de : \textbf{\Large Pr Bamba GUEYE \& Pr Mountaga LAM}}\\  
         \vspace{1cm}
         \hspace{1cm}
@@ -103,47 +103,31 @@
     \bigskip
     \textbf{\large Alhamdulillah Rabbi al-‘Alamin.}
 
-    \bigskip
+    \medskip
 
     Ya \textbf{\textsc{\Large Allah}}, merci de m'avoir permis de réaliser ce travail, de m'avoir donné la force et le courage d'affronter toutes les difficultés que j'ai pu rencontrer.
-    
-    \medskip
 
     Je tiens à témoigner toute ma reconnaissance et mes remerciements les plus sincères au \textbf{\large Professeur Mountaga LAM}, mon directeur à la DES et encadrant professionnel de ce travail.
 
-    Merci, tout d’abord, de m’avoir permis d’obtenir mon tout premier travail professionnel et salaire de ma vie en m’acceptant à travailler sous votre direction à la DES. Merci pour votre patience, vos encouragements, 
-    votre disponibilité, votre confiance et vos nombreux conseils précieux.
-
-    \textit{C’est un immense honneur d’avoir pu travailler avec vous.}
-
-    \medskip
+    Merci, tout d’abord, de m’avoir permis d’obtenir mon tout premier travail professionnel et salaire de ma vie en m’acceptant pour travailler sous votre direction à la DES. Merci pour votre patience, vos encouragements, 
+    votre disponibilité, votre confiance et vos nombreux conseils précieux.\\
+    \textit{ C’est un immense honneur d’avoir pu travailler avec vous.}
 
     Je remercie également le \textbf{Professeur Bamba GUEYE}, directeur de l’Office du Bac et encadrant académique de ce travail, pour ce sujet particulièrement stimulant, pour sa disponibilité et ses conseils précieux tout au long de ce travail.
 
-    \medskip
-
     Je tiens à remercier tout particulièrement \textbf{Dr Souley KANE}, mon directeur de formation, qui m’a permis d’obtenir ce stage et qui a profondément changé ma vie professionnelle en m’ouvrant les portes d’un monde d’opportunités que je n’aurais jamais imaginé intégrer.
-
-    \medskip
 
     Je n’oublierai pas mes collègues à la DES, en particulier Madame \textbf{MBAYE} et Madame \textbf{PAYE} qui, par leur hospitalité et leur gentillesse, ont été comme des mères pour moi.
     Merci à vous et ainsi qu’à tous mes autres collègues de travail pour votre aide précieuse tout au long de mon stage.
 
-    \medskip
-
     Je remercie également les membres du jury pour l’attention accordée à ce travail, ainsi que pour leurs remarques pertinentes et enrichissantes.
-
-    \medskip
 
     Je remercie tous les camarades que j’ai rencontrés au fil de mon parcours pour leur fraternité et leur présence.
 
-    \medskip
-
     Ma profonde gratitude va à l’endroit de tous les enseignants qui m’ont transmis leur savoir avec passion.Grâce à vous, je suis devenu la personne que je suis aujourd’hui.
     
-    \vspace{1cm}
-    
-    \textit{Merci infiniment à tous, c'était un honneur.}
+    \vspace{0.5cm}
+    \hfill \textit{Merci infiniment à tous, c'était un honneur.}
 
     % Résumé et Abstract
     \newpage
@@ -160,14 +144,15 @@
     % Liste des codes
     \newpage
     \lstlistoflistings
+    % Liste des tableaux
+    % \newpage
+    \listoftables
 
     % Table des figures 
     \newpage
     \listoffigures
 
-    % Liste des tableaux
-    \newpage
-    \listoftables
+    
 
     % Importation des chapitres
 
@@ -184,8 +169,6 @@
     \input{chapitre/chapitre5} % Importation du chapitre 5
 
     \input{chapitre/chapitre6} % Importation du chapitre 6
-
-    \input{chapitre/chapitre7} % Importation du chapitre 7
      
     \input{chapitre/conclusionG} % Importation du chapitre 3
 
